@@ -1,0 +1,16 @@
+install:
+  - rm -rf public || exit 0
+# Build the website
+script:
+  - bin/hugo
+# Deploy to GitHub pages
+deploy:
+  provider: pages
+  repo: atts-group/atts-group.github.io
+  target-branch: master
+  skip_cleanup: true
+  keep-history: true
+  github_token: $GITHUB_TOKEN
+  local_dir: public
+  on:
+    branch: master
