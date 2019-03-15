@@ -1,7 +1,12 @@
 language: go
 
+git:
+    submodules: false
+
 before_script:
     - rm -rf public 2> /dev/null
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
 
 # Build the website
 script:
