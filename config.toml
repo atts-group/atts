@@ -1,5 +1,5 @@
 baseURL = "/"
-title = "Code it now"
+title = "ATTS"
 theme = "hugo-material-docs"
 metadataformat = "yaml"
 canonifyurls = true
@@ -10,7 +10,10 @@ pygmentsStyle = "tango" # "emacs" # "autumn" # "manni" # "friendly"
 
 [params]
 	[params.palette]
-	primary="blue"
+	primary="red"
+
+	provider = "GitHub"
+	repo_url = "https://github.com/atts-group/atts"
 		
 [outputs]
 	home = [ "HTML", "JSON"]
