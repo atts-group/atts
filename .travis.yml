@@ -8,7 +8,7 @@ before_script:
 # Build the website
 script:
     - hugo
-    - echo "$CNAME_URL" > public/CNAME
+    - echo "$CNAME" > public/CNAME
 
 after_success:
   - git commit -a -m "Committed by Travis-CI build number: $TRAVIS_JOB_ID"
