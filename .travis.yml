@@ -3,6 +3,13 @@ install:
 # Build the website
 script:
   - bin/hugo
+
+after_script:
+  - echo "$CNAME" > public/CNAME
+
+after_success:
+  - git commit -a -m "Committed by Travis-CI build number: $TRAVIS_JOB_ID"
+
 # Deploy to GitHub pages
 deploy:
   provider: pages
@@ -12,5 +19,6 @@ deploy:
   keep-history: true
   github_token: $GITHUB_TOKEN
   local_dir: public
+  name: TravisCIBot
   on:
     branch: master
