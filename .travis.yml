@@ -1,17 +1,12 @@
 language: go
-install:
-  - go get github.com/gohugoio/hugo
 
 before_script:
     - rm -rf public 2> /dev/null
 
 # Build the website
 script:
-    - hugo
+    - bin/hugo
     - echo "$CNAME" > public/CNAME
-
-after_success:
-  - git commit -a -m "Committed by Travis-CI build number: $TRAVIS_JOB_ID"
 
 # Deploy to GitHub pages
 deploy:
@@ -22,6 +17,5 @@ deploy:
   keep-history: true
   github_token: $GITHUB_TOKEN
   local_dir: public
-  name: TravisCIBot
   on:
     branch: master
