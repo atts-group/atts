@@ -1,11 +1,14 @@
+language: go
 install:
-  - rm -rf public || exit 0
+  - go get github.com/gohugoio/hugo
+
+before_script:
+    - rm -rf public 2> /dev/null
+
 # Build the website
 script:
-  - bin/hugo
-
-after_script:
-  - echo "$CNAME" > public/CNAME
+    - hugo
+    - echo "$CNAME_URL" > public/CNAME
 
 after_success:
   - git commit -a -m "Committed by Travis-CI build number: $TRAVIS_JOB_ID"
