@@ -1,0 +1,18 @@
+baseURL = "/"
+title = "Code it now"
+theme = "hugo-material-docs"
+metadataformat = "yaml"
+canonifyurls = true
+sectionPagesMenu = "main" 
+pygmentscodefences = true
+pygmentsStyle = "tango" # "emacs" # "autumn" # "manni" # "friendly"
+
+
+[params]
+	[params.palette]
+	primary="blue"
+		
+[outputs]
+	home = [ "HTML", "JSON"]
+	page = [ "HTML", "JSON"]
+
