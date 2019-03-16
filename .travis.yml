@@ -3,15 +3,27 @@ language: go
 git:
     submodules: false
 
+before_install:
+    - sudo apt-get update
+
+install:
+    - sudo apt-get install curl -y
+
 before_script:
     - rm -rf public 2> /dev/null
     - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
     - git submodule update --init --recursive
-
+    
 # Build the website
 script:
     - bin/hugo
     - echo "$CNAME" > public/CNAME
+
+after_success:
+    - curl "https://sc.ftqq.com/SCU42621T41fbef2c0344eaf1bc666ab51952e1815c46706f2626b.send?text=TravisCIBuildSuccess"
+
+after_failure:
+    - curl "https://sc.ftqq.com/SCU42621T41fbef2c0344eaf1bc666ab51952e1815c46706f2626b.send?text=TravisCIBuildFail"
 
 # Deploy to GitHub pages
 deploy:
