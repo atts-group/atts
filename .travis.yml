@@ -20,14 +20,7 @@ script:
     - echo "$CNAME" > public/CNAME
 
 notifications:
-  webhooks:
-    urls:
-      - https://atts-webhook.herokuapp.com/notify/push_bear
-    on_success: change # default: always
-    on_failure: always # default: always
-    on_start: never   # default: never
-    on_cancel: never # default: always
-    on_error: never # default: always
+  webhooks: https://atts-webhook.herokuapp.com/notify/push_bear
 
 # Deploy to GitHub pages
 deploy:
