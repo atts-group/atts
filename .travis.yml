@@ -19,11 +19,15 @@ script:
     - bin/hugo
     - echo "$CNAME" > public/CNAME
 
-after_success:
-    - curl "https://sc.ftqq.com/SCU42621T41fbef2c0344eaf1bc666ab51952e1815c46706f2626b.send?text=TravisCIBuildSuccess"
-
-after_failure:
-    - curl "https://sc.ftqq.com/SCU42621T41fbef2c0344eaf1bc666ab51952e1815c46706f2626b.send?text=TravisCIBuildFail"
+notifications:
+  webhooks:
+    urls:
+      - https://atts-webhook.herokuapp.com/notify/push_bear
+    on_success: change # default: always
+    on_failure: always # default: always
+    on_start: never   # default: never
+    on_cancel: never # default: always
+    on_error: never # default: always
 
 # Deploy to GitHub pages
 deploy:
