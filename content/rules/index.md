@@ -35,13 +35,16 @@ draft: false
 > 开始使用前你需要先安装 [hugo](https://github.com/gohugoio/hugo/releases)，下载对应平台的版本即可。
 
 目前有 4 个分类（type）：
+
 - algorithm
 - articles
 - tips
 - translation
 
-新建文章需要使用 `hugo new {type}/{title}`.md 的方式新建，不能直接创建文件。
+新建文章需要使用 `hugo new {type}/{title}.md` 的方式新建，不能直接创建文件。
 
-当写完后用 git push 推送的 master 分支，即可完成。
+> 这里的 {type} 就是上面 4 个分类的其中一个，{title} 就是你写的标题
+
+当写完后用使用 `hugo server` 来观察一下你新添加的是否正确，然后用 git push 推送的 master 分支，即可完成。
 
 > 禁止修改非你创建的文件，特别的隐藏文件，除非你知道为什么要这么修改
