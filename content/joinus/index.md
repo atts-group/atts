@@ -17,5 +17,5 @@ email 联系: h1x2y3awalm@gmail.com
 | zhegnxiaowai    | h1x2y3awalm@gmail.com | 0        | 2019年3月18日 |
 | jarvys          | leguroky@gmail.com    | 0        | 2019年3月18日 |
 | tubby           | tubby.xue@gmail.com   | 0        | 2019年3月18日 |
-| frostming       | mianghong@gmai.com    | 0        | 2019年3月18日 |
+| frostming       | mianghong@gmail.com    | 0        | 2019年3月18日 |
 | WokoLiu         | banbooliu@gmail.com   | 0        | 2019年3月18日 |
