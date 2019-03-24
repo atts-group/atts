@@ -5,6 +5,8 @@ metadataformat = "yaml"
 canonifyurls = true
 sectionPagesMenu = "main"
 
+staticDir = ["static"]
+
 pygmentscodefences = true
 pygmentsStyle = "tango" # "emacs" # "autumn" # "manni" # "friendly"
 enableRobotsTXT = true
