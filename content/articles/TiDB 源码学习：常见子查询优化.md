@@ -331,3 +331,8 @@ func (s *decorrelateSolver) optimize(p LogicalPlan) (LogicalPlan, error) {
 在 Q2 中 Selection 节点删除后，子查询不再包含关联变量，Apply 可以被转换为 Join。去关联以后得到的查询计划大致如下：
 
 ![](/tidb-subquery-optimization/Q2-logical-plan-decorrelated.png)
+
+
+
+[原博文链接](http://blog.logflows.top/2019/03/30/TiDB-%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%EF%BC%9A%E5%B8%B8%E8%A7%81%E5%AD%90%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/)
+
