@@ -1,7 +1,7 @@
 ---
 title: "Git_lg"
 date: 2019-03-31T20:41:50+08:00
-draft: true
+draft: false
 ---
 
 `git log` 可以用来查看提交历史，但格式并不舒服，我们可以通过配置 `git config` 来解决这个问题：
