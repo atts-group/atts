@@ -6,7 +6,7 @@ draft: false
 
 原文链接 [Proposal: A new aggregate function execution framework](https://github.com/pingcap/tidb/blob/master/docs/design/2018-07-01-refactor-aggregate-framework.md)
 
-##摘要
+## 摘要
 
 这篇 proposal 提出了一种的聚合计算执行框架，用来提高聚合函数的执行性能。
 
