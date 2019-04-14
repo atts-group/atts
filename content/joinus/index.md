@@ -18,3 +18,4 @@ email 联系: h1x2y3awalm@gmail.com
 | jarvys          | leguroky@gmail.com    | 0        | 2019年3月18日 |
 | tubby           | tubby.xue@gmail.com   | 0        | 2019年3月18日 |
 | WokoLiu         | banbooliu@gmail.com   | 0        | 2019年3月18日 |
+| kingkoma        | kingkoma8@gmail.com   | 0        | 2019年4月07日 |
