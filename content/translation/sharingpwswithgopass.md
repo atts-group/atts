@@ -1,5 +1,5 @@
 ---
-title: "Sharingpwswithgopass"
+title: "使用 gopass，git 和 gpg 来分享你的密码"
 date: 2019-04-21T16:20:07+09:00
 draft: false
 ---
