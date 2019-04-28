@@ -9,7 +9,7 @@ draft: false
 链接：[same tree](https://leetcode.com/problems/same-tree/)
 
 ``` python
- Definition for a binary tree node.
+# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, x):
         self.val = x
