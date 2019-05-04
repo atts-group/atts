@@ -1,11 +1,16 @@
 ---
-title: "Leetcode: 709 To Lower Case"
+title: "Leetcode_709: To Lower Case"
 date: 2019-04-07T14:12:27+09:00
 draft: false
+tags: ["kingkoma", "leetcode"]
 ---
-#### 题号：709 难度：easy 链接：[原题](https://leetcode.com/problems/to-lower-case/)  描述：使用 ASCII 把字母统一为小写
+> 题号：709 <br>
+> 难度：easy <br>
+> 链接：https://leetcode.com/problems/to-lower-case/ <br>
+> 描述：使用 ASCII 把字母统一为小写 <br>
 
 ```python
+
 class Solution:
     """use ASCII to return the same str in lowercase """
 

@@ -1,15 +1,17 @@
 ---
-title: "Leetcode 100: same tree"
+title: "Leetcode_100: same tree"
 date: 2019-04-21T17:52:54+09:00
 draft: false
+tags: ["kingkoma", "leetcode"]
 ---
 
-题号：100
-难度：easy
-链接：[same tree](https://leetcode.com/problems/same-tree/)
+> 题号：100 <br>
+> 难度：easy <br>
+> 链接：https://leetcode.com/problems/same-tree/ <br>
+> 描述：查看两棵树是否一致 <br>
 
 ``` python
-# Definition for a binary tree node.
+
 class TreeNode:
     def __init__(self, x):
         self.val = x
