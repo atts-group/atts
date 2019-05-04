@@ -45,3 +45,6 @@ googleAnalytics = "UA-136313587-1"
 	home = [ "HTML", "JSON"]
 	page = [ "HTML", "JSON"]
 
+
+[taxonomies]
+        tag = "tags"
