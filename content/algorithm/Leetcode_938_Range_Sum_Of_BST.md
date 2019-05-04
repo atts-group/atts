@@ -2,7 +2,7 @@
 title: "Range Sum Of BST"
 date: 2019-05-03T18:49:11+09:00
 draft: false
-tags: [kingkoma, leetcode]
+tags: ["kingkoma", "leetcode"]
 ---
 
 ``` python
