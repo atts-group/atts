@@ -28,13 +28,13 @@
 
 			{{ .Content }}
 
-                        {{ if .Site.Taxonomies.tags }}
-                            {{ with .Site.Taxonomies.tags }}
-                                <ul id="tags">
+                        {{ if .Site.Params.tags }}
+                            {{ with .Site.Params.tags }}
+                                <div id="tags">
                                     {{ range . }}
-                                    <li> <a href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> </li>
-                                    {{ end }}
-                                </ul>
+                                    <a href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+                                  
+                                </div>
                             {{ end }}
                         {{ end }}
 
