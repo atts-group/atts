@@ -27,18 +27,23 @@
 			<h1>{{ .Title }} {{ if .IsDraft }} (Draft){{ end }}</h1>
 
 			{{ .Content }}
-
-                        {{ if .Site.Params.tags }}
-                            {{ with .Site.Params.tags }}
+     
+                        </br>
+                        
+                        <div>
+                        {{ if .Params.tags }}
+							<div>tags: </div>
+                            {{ with .Params.tags }}
                                 <div id="tags">
                                     {{ range . }}
                                     <div>
-                                        <a href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+                                        <a href="{{ "tags" | absURL }}/{{ . | urlize }}">{{ . }}</a> 
                                     </div>
                                     {{ end }}
                                 </div>
                             {{ end }}
                         {{ end }}
+                        </div>
 
 			<aside class="copyright" role="note">
 				{{ with .Site.Params.copyright }}
