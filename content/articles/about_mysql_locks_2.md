@@ -2,11 +2,12 @@
 title: "漫谈死锁"
 date: 2019-04-21T18:18:29+09:00
 draft: false
+tags: ["kingkoma", "mysql"]
 ---
 
-作者：杨一 
+> 作者：杨一
 
-原链接： [漫谈死锁](https://mp.weixin.qq.com/s?__biz=MzAxOTY5MDMxNA==&mid=2455759362&idx=1&sn=423432bad8307690348a28a42dad3129&chksm=8c686c27bb1fe5311d4a6ee87d6b8c0be7cec0e7c81aa10acb770227f8bbd279d91a1e896146&scene=21#wechat_redirect)
+> 原链接： [漫谈死锁](https://mp.weixin.qq.com/s?__biz=MzAxOTY5MDMxNA==&mid=2455759362&idx=1&sn=423432bad8307690348a28a42dad3129&chksm=8c686c27bb1fe5311d4a6ee87d6b8c0be7cec0e7c81aa10acb770227f8bbd279d91a1e896146&scene=21#wechat_redirect)
 
 ## 一、前言
 
@@ -31,6 +32,7 @@ d 事务之间因为持有锁和申请锁导致了循环等待。
 ![640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1](https://mmbiz.qpic.cn/mmbiz_png/PfMGv3PxR784nY5yG8nJO634njibCwjx5or9XHwvgW3YyrvhicREbiaEM5pWWSofDEyv3Fzg0po7rV7EbRz1ag6Xw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 ### 3.1 死锁检测
 当 InnoDB 事务尝试获取(请求)加一个锁，并且需要等待时，InnoDB 会进行死锁检测。正常的流程如下:
+
 - InnoDB 的初始化一个事务，当事务尝试申请加一个锁，并且需要等待时 (wait_lock)，innodb 会开始进行死锁检测 (deadlock_mark)
 - 进入到 lock_deadlock_check_and_resolve() 函数进行检测死锁和解决死锁
 - 检测死锁过程中，是有计数器来进行限制的，在等待 wait-for graph 检测过程中遇到超时或者超过阈值，则停止检测。
@@ -61,15 +63,11 @@ d 事务之间因为持有锁和申请锁导致了循环等待。
 ```
 LOCK_REC_NOT_GAP      （锁记录）
 
- LOCK_GAP              （锁记录前的GAP）
+ LOCK_GAP              （锁记录前的 GAP）
 
- LOCK_ORDINARY         （同时锁记录+记录前的GAP，也即
-Next
- 
-Key
-锁）
+ LOCK_ORDINARY         （同时锁记录+记录前的GAP，也即 NextKey 锁）
 
- LOCK_INSERT_INTENTION （插入意向锁，其实是特殊的GAP锁）
+ LOCK_INSERT_INTENTION （插入意向锁，其实是特殊的 GAP 锁）
 ```
 锁的属性可以与锁模式任意组合。例如：
 
@@ -80,13 +78,13 @@ Lock_X
  或者
 Lock_S
 
- locks gap before rec  表示为gap锁：
+ locks gap before rec  表示为 gap 锁：
 lock
 ->type_mode & LOCK_GAP
 
  locks rec but 
 not
- gap 表示为记录锁，非gap锁：
+ gap 表示为记录锁，非 gap 锁：
 lock
 ->type_mode & LOCK_REC_NOT_GAP
 
@@ -146,19 +144,13 @@ insert 的加锁方式
 
  如果不等: 则完成插入（结束）
 
- 如果相等: 再判断P是否有锁，
+ 如果相等: 再判断 P 是否有锁，
 
-    a 如果没有锁:报
-1062
-错误(duplicate key),说明该记录已经存在，报重复值错误 
+    a 如果没有锁:报 1062 错误(duplicate key),说明该记录已经存在，报重复值错误
 
-    b 加S-
-lock
-,说明该记录被标记为删除, 事务已经提交，还没来得及purge
+    b 加 S-lock,说明该记录被标记为删除, 事务已经提交，还没来得及 purge
 
-    c 如果有锁: 则加S-
-lock
-,说明该记录被标记为删除，事务还未提交.
+    c 如果有锁: 则加 S-lock,说明该记录被标记为删除，事务还未提交.
 ```
 该结论引自: http://keithlan.github.io/2017/06/21/innodblocksalgorithms/
 
@@ -178,6 +170,7 @@ delete 的加锁方式
 
 ## 六、如何查看死锁
 1. 查看事务锁等待状态情况
+
 ```  
 select
  * 
@@ -214,7 +207,6 @@ select
 
  b.trx_query block_query
 
- 
 from
  information_schema.innodb_lock_waits w
 
@@ -239,14 +231,15 @@ from
 show engine innodb status;
 ```
 ## 七、如何尽可能避免死锁
-1. 事务隔离级别使用 read committed 和 binlog_format=row ，避免 RR 模式带来的 gap 锁竞争。
 
-2. 合理的设计索引,区分度高的列放到组合索引前列，使业务 sql 尽可能的通过索引定位更少的行，减少锁竞争。
+- 事务隔离级别使用 read committed 和 binlog_format=row ，避免 RR 模式带来的 gap 锁竞争。
 
-3. 调整业务逻辑 SQL 执行顺序，避免 update/delete 长时间持有锁 sql 在事务前面，(该优化视情况而定)。
+- 合理的设计索引,区分度高的列放到组合索引前列，使业务 sql 尽可能的通过索引定位更少的行，减少锁竞争。
 
-4. 选择合理的事务大小，小事务发生锁冲突的几率也更小；
+- 调整业务逻辑 SQL 执行顺序，避免 update/delete 长时间持有锁 sql 在事务前面，(该优化视情况而定)。
 
-5. 访问相同的表时，应尽量约定以相同的顺序访问表，对一个表而言，尽可能以固定的顺序存取表中的行。这样可以大大减少死锁的机会；
+- 选择合理的事务大小，小事务发生锁冲突的几率也更小；
 
-6. 5.7.15 版本之后提供了新的功能 innodb_deadlock_detect 参数,可以关闭死锁检测，提高并发TPS。
+- 访问相同的表时，应尽量约定以相同的顺序访问表，对一个表而言，尽可能以固定的顺序存取表中的行。这样可以大大减少死锁的机会；
+
+- 5.7.15 版本之后提供了新的功能 innodb_deadlock_detect 参数,可以关闭死锁检测，提高并发 TPS。

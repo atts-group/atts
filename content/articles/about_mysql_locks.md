@@ -2,22 +2,21 @@
 title: "Mysql 锁：灵魂七拷问"
 date: 2019-04-14T13:49:26+09:00
 draft: false
+tags: ["kingkoma", "mysql"]
 ---
 
-## Mysql 锁：灵魂七拷问 
+> 作者：柳树 on 美业 from 有赞coder
 
-作者：柳树 on 美业 from 有赞coder
+> 原链接： [Mysql 锁：灵魂七拷问](https://mp.weixin.qq.com/s/R7gN-dVA4LrVi5zy2LvG_Q)
 
-原链接： [Mysql 锁：灵魂七拷问](https://mp.weixin.qq.com/s/R7gN-dVA4LrVi5zy2LvG_Q)
-
-#### 一、缘起
+### 一、缘起
 
 假设你想给别人说明，Mysql 里面是有锁的，你会怎么做？
 
 大多数人，都会开两个窗口，分别起两个事务，然后 update 同一条记录，在发起第二次 update 请求时，block，这样就说明这行记录被锁住了：
 ![](https://mmbiz.qpic.cn/mmbiz_png/PfMGv3PxR7icSKQQqXlJcokhOnL03GktP5TvkibJsc1eQCia2y2YzDAvGrEI5Ipco1hNAHyeUJPibGwjsI3zAt4BUg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
-#### 二、禁锢
+### 二、禁锢
 
 问题来了，貌似只有显式的开启一个事务，才会有锁，如果直接执行一条 update 语句，会不会加锁呢？
 
@@ -56,7 +55,7 @@ draft: false
 既然对内存中 i 的操作需要加锁，保证并发安全，那么对数据库的记录进行修改，也必须加锁。
 
 这道理很简单，但是很多人，未曾想过。
-#### 三、释然
+### 三、释然
 
 为什么大家都喜欢用第一部分里的例子来演示 Mysql 锁？
 
@@ -84,7 +83,7 @@ draft: false
 事务 B 的修改，居然让事务 A 看到了，这明目张胆的违反了事务 ACID 中的 I，Isolation，隔离性（事务提交之前，对其他事务不可见）。
 
 所以，结论：Mysql 为了满足事务的隔离性，必须在 commit 才释放锁。
-#### 四、自私的基因
+### 四、自私的基因
 
 有人说，如果我是读未提交（ Read Uncommited ）的隔离级别，可以读到对方未提交的东西，是不是就不需要满足隔离性，是不是就可以不用等到 commit 才释放锁了？
 
@@ -93,13 +92,13 @@ draft: false
 还是举例子：
 ![](https://mmbiz.qpic.cn/mmbiz_png/PfMGv3PxR7icSKQQqXlJcokhOnL03GktPqf88qicW084hLxEYPNkW2a3lvdvXnqdibaLzEqlKX6uzBj4dcBnTtVRA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
 
-事务A是 Read Committed，事务B是 Read Uncommitted；
+事务 A 是 Read Committed，事务B是 Read Uncommitted；
 
-事务B执行了一条 update 语句，把 c 更新成了3
+事务 B 执行了一条 update 语句，把 c 更新成了 3
 
 假设事务 B 觉得自己是读未提交，就把锁释放了
 
-那这时候事务 A 过来执行当前读，读到了 c 就是3
+那这时候事务 A 过来执行当前读，读到了 c 就是 3
 
 事务 A 读到了别的事务没有提交的东西，而事务 A，还说自己是读已提交，真是讽刺
 
@@ -108,20 +107,20 @@ draft: false
 显然，Mysql 不允许这么自私的行为存在。
 
 结论：就算你是读未提交，你也要等到 commit 了再释放锁。
-#### 五、海纳百川
+### 五、海纳百川
 
-都知道 Mysql 的行锁，分为X锁和S锁，为什么 Mysql 要这么做呢？
+都知道 Mysql 的行锁，分为 X 锁和 S 锁，为什么 Mysql 要这么做呢？
 
 这个简单吧，同样可以类比 Java 的读写锁：
 
     It allows multiple threads to read a certain resource, but only one to write it, at a time.
 
 允许多个线程同时读，但只允许一个线程写，既支持并发提高性能，又保证了并发安全。
-#### 六、凤凰涅磐
+### 六、凤凰涅磐
 
 最后来个难点的。
 
-假设事务 A 锁住了表T里的一行记录，这时候，你执行了一个 DDL 语句，想给这张表加个字段，这时候需要锁表吧？但是由于表里有一行记录被锁住了，所以这时候锁表时会 block。
+假设事务 A 锁住了表 T 里的一行记录，这时候，你执行了一个 DDL 语句，想给这张表加个字段，这时候需要锁表吧？但是由于表里有一行记录被锁住了，所以这时候锁表时会 block。
 
 那 Mysql 在锁表时，怎么判断表里有没有记录被锁住呢？
 
@@ -142,13 +141,9 @@ Mysql 会怎么做呢？
 很多人知道意向锁是什么，但是却不知道为什么需要一个粒度比较大的锁，不知道它为何而来，不知道 Mysql 为何要设计个意向锁出来。
 
 知其然，知其所以然。
-#### 七、参考文献
+### 七、参考文献
 
-    
-[InnoDB Locking](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html)
-    
-
-    
+[InnoDB Locking](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html) </br>
 [ReadWriteLock](http://tutorials.jenkov.com/java-util-concurrent/readwritelock.html)
     
 

@@ -2,6 +2,7 @@
 title: "Tmux 快捷键"
 date: 2019-04-28T23:13:11+09:00
 draft: false
+tags: ["kingkoma", "hot_keys"]
 ---
 
 
@@ -47,9 +48,10 @@ tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xar
 - 查看快捷键 prefix ？
 - 进入命令模式 prefix ：
 
-
-[reference1](https://www.kancloud.cn/kancloud/tmux/62463)
-[reference2](https://www.cnblogs.com/kaiye/p/6275207.html)
+</br>
+### 参考链接：
+https://www.kancloud.cn/kancloud/tmux/62463 </br>
+https://www.cnblogs.com/kaiye/p/6275207.html
 
 
 

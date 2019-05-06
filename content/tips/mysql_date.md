@@ -2,11 +2,12 @@
 title: "Mysql 里的 DATE 函数"
 date: 2019-04-28T10:55:12+09:00
 draft: false
+tags: ["kingkoma","mysql"]
 ---
 
 这周发现目前在做的项目的一个地方，就是要读取特定时间的订单数据，发现这个数据并不准确。
-后来找到原因是因为前端传过来的数据是“YYYY-MM-DD”模式，
-但是数据库保存的数据是“YYYY-MM-DD HH:MM:SS”格式。
+后来找到原因是因为前端传过来的数据是 “YYYY-MM-DD” 模式，
+但是数据库保存的数据是 “YYYY-MM-DD HH:MM:SS” 格式。
 
 所以查询语句从
 ``` Mysql

@@ -2,11 +2,11 @@
 title: "使用 gopass，git 和 gpg 来分享你的密码"
 date: 2019-04-21T16:20:07+09:00
 draft: false
+tags: ["kingkoma","security","git"]
 ---
-作者： Woile
-原链接： [Sharing passwords using gopass, git and gpg
+> 作者： Woile </br>
+> 原链接： [Sharing passwords using gopass, git and gpg
 ](https://woile.github.io/posts/sharing-team-secrets/)
-（删减版）
 
 不想再把你的密码放在不可靠却方便的地方？
 不想再在 slack，notes 这些不可信赖的平台上分享密码？
@@ -15,6 +15,7 @@ draft: false
 
 ## 背景
 我为了寻找一个安全的方式去储存我的密码花了不少时间。当然，除了安全，我还希望有以下性能：
+
 - 密码存在云里
 - 设备之间可以简单同步
 - 可以很方便地与人共享
@@ -23,6 +24,7 @@ draft: false
 ## gopass 是怎么工作的
 gopass 就像是有多一份电池的 [pass](https://www.passwordstore.org/)（unix 密码管理器）
 在这里面，它拥有的且和我相关的性能有
+
 1. 用 gpg 进行加密；
 2. 用 git 进行密码同步；
 3. 不同属性的密码可以放在不同的储存地方（个人、公司等）；
@@ -42,6 +44,7 @@ gopass 就像是有多一份电池的 [pass](https://www.passwordstore.org/)（u
 在 gopass 的文本中，我们需要用 gpg 提供的公钥和私钥。
 想象一下你有很多的公钥，万一它们被锁了，只能用你手上拥有的私钥才能打开。
 从此我们可以总结出两件事情：
+
 1. 你可以分发你的公钥并且让任何人对它的信息进行加密。比如说我把公钥给朋友了，他们放了一些东西进去并锁住，只有我可以打开它。当然，我也可以自己加密自己的东西，以防别人窥探。
 2. 私钥非常重要。私钥要安全的使用，不要丢失私钥，要备份私钥。你可以用加密的随身硬盘、放在安全地方的小纸条或者 [yubikey](https://www.yubico.com/)。
 ### 创建密钥
@@ -175,17 +178,21 @@ gopass recipients add logan@pm.me
 你当然还可以移除收信人。
 你自己查一下怎么操作吧。
 提示： gopass recipients --help
-# 结论
-我弄了一份 gopass [cheatsheet](https://woile.github.io/gopass-cheat-sheet/) 和 一个 [presentation](https://woile.github.io/gopass-presentation/)。
+## 结论
+我弄了一份 gopass [cheatsheet](https://woile.github.io/gopass-cheat-sheet/) 和 一个 [presentation](https://woile.github.io/gopass-presentation/)。</br>
 gopass 是一个很棒的工具。不幸的是对于非开发者可能有点门槛。
 下面是一些我用来加强 gopass 操作用到的其它工具。
-[Android password store](https://github.com/zeapo/Android-Password-Store)
+
+[Android password store](https://github.com/zeapo/Android-Password-Store) </br>
 我建议用 f-droid 来安装它，你需要 OpenKey-chain 来创建一个新的 gpg 密钥
-[gopass bridge](https://github.com/gopasspw/gopassbridge)
+
+[gopass bridge](https://github.com/gopasspw/gopassbridge) </br>
 firefox 或 chrome 上的插件，可以让你登录你的存储地址。
-[gopass ui](https://github.com/codecentric/gopass-ui)
+
+[gopass ui](https://github.com/codecentric/gopass-ui) </br>
 在命令行里使用 gopass 的基于 electron 的 ui 软件。
 提供了丰富的图形界面去搜索和管理你的密码。
+
 欢迎任何反馈，我不是安全专家，如果有更好的更安全的工作流可以告诉我，我很高兴。
 
 

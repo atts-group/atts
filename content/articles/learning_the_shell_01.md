@@ -7,7 +7,7 @@ tags: ["kingkoma", "shell"]
 
 ## Shell 的定义
 
-- 一个命令解释器，
+- 一个命令解释器
 - 位于操作系统和应用程序之间
 
 ## Shell 的作用
@@ -18,37 +18,32 @@ shell 负责把`应用程序`的输入命令信息解释给`操作系统`，将`
 - 图形界面式
   - 桌面
 - 命令行式
-  - windows 系统
-    - cmd.exe
-  - Linux 系统
-    - sh
-    - bash
-    - zsh
-    - ...
+  - windows 系统 (cmd.exe)
 
+  - Linux 系统 (sh, bash, zsh...)
 
-#### 查看系统 shell 信息
+### 查看系统 shell 信息
 ```
 echo $SHELL
 ```
 
-#### 查看系统支持的 shell
+### 查看系统支持的 shell
 ```
 cat /etc/shells
 ```
 
 ## Shell 的使用
-- 手工方式
+- 手工方式 </br>
 `逐行输入命令，逐行进行确认执行`
 
-- 脚本方式
+- 脚本方式 </br>
 `把执行命令写进脚本文件中，通过执行脚本达到执行效果`
 
-#### shell 脚本
+### shell 脚本定义
 `当可执行的 Linux 命令或语句不在命令行状态下执行，而是通过一个文件执行时，我们称文件为shell 脚本。`
 
-#### shell 脚本示范
-- 创建一个脚本
+### shell 脚本示范
+- 创建一个脚本 </br>
 ```
 vim temp.sh
 ```
