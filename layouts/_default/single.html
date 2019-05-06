@@ -14,6 +14,7 @@
       <h4 id="date"> {{ .Date.Format "Mon Jan 2, 2006" }} </h4>
       <h5 id="wordcount"> {{ .WordCount }} Words </h5>
     </section>
+    {{ if .Params.topics }}
     {{ with .Params.topics }}
     <ul id="topics">
       {{ range . }}
@@ -21,6 +22,8 @@
       {{ end }}
     </ul>
     {{ end }}
+    {{ end }}
+    {{ if .Params.tags }}
     {{ with .Params.tags }}
     <ul id="tags">
       {{ range . }}
@@ -28,13 +31,16 @@
       {{ end }}
     </ul>
     {{ end }}
+    {{ end }}
     </div>
     <div>
+        {{ if .PrevInSection }}
         {{ with .PrevInSection }}
           <a class="previous" href="{{.Permalink}}"> {{.Title}}</a>
         {{ end }}
         {{ with .NextInSection }}
           <a class="next" href="{{.Permalink}}"> {{.Title}}</a>
+        {{ end }}
         {{ end }}
     </div>
 </aside>
