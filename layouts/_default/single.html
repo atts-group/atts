@@ -32,8 +32,10 @@
                             {{ with .Site.Params.tags }}
                                 <div id="tags">
                                     {{ range . }}
-                                    <a href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> 
-                                  
+                                    <div>
+                                        <a href="{{ "tags" | absURL }}{{ . | urlize }}">{{ . }}</a> 
+                                    </div>
+                                    {{ end }}
                                 </div>
                             {{ end }}
                         {{ end }}
