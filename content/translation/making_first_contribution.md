@@ -2,7 +2,7 @@
 title: "手把手带你创建你第一个 GitHub 贡献"
 date: 2019-05-04T17:20:23+09:00
 draft: false
-tags: ["kingkoma","github"]
+tags: ["kingkoma","github", "contribute", "OpenSource"]
 ---
 
 
