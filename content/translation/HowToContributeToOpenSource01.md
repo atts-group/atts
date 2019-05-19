@@ -5,6 +5,8 @@ draft: false
 tags: ["kingkoma", "contribute", "OpenSource"]
 ---
 
+原链接： [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
+
 ## 一、为什么要为开源做贡献
 给开源项目做贡献是一个具有投资价值回报的事情，在学习、传授和积累任何你可以想象到的技能经验
 等等各个方面。
